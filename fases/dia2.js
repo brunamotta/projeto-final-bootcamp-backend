@@ -1,6 +1,6 @@
-const prompt = require('prompt-sync')();
+const prompt              = require('prompt-sync')();
 const { validarResposta } = require('../validacoes.js');
-const { valorAleatorio } = require('../sortear.js');
+const { valorAleatorio }  = require('../sortear.js');
 
 module.exports = (protagonista, crush1, crush2, crush3) => {
     console.log('');
@@ -23,9 +23,9 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
     if (resposta === 'A') {
 
         // ESTUDOS
-        let sortear = valorAleatorio()*2;
+        let sortear = valorAleatorio();
 
-        if (sortear >= 3) {
+        if (sortear >= 2) {
             console.log('');
             console.log('Você decidiu continuar estudando. A cada equação resolvida, sua mente se aguçava, e a sensação de conquista era imensa. Afinal, inteligência era sexy, não é mesmo?');
             
@@ -34,6 +34,7 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
             console.log(`Sua inteligência aumentou para ${protagonista.inteligencia}.`);
 
         } else {
+            console.log('');
             console.log('Você tentou se concentrar, mas a presença dos crushes na biblioteca era uma distração constante. Você falhou nos estudos e ficou de recuperação em cálculo. :(');
             
             protagonista.inteligencia = protagonista.decrementarAtributo(protagonista.inteligencia);
@@ -95,8 +96,8 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
 
     function jogarCharme(crush) {
         console.log(`Você se aproximou de ${crush.nome} e disse:`);
-        console.log(`- "${crush.nome}, se você fosse um exercício, eu te faria todos os dias. Mas com mais repetições e menos descanso. ;)" `);
-        if (protagonista.flertar('charme', protagonista, crush)) {
+        console.log(`- "${crush.nome}, com essa concentração toda, acho que você tá tentando decifrar a fórmula da minha felicidade. Quer uma dica?" `);
+        if (protagonista.flertar('inteligencia', protagonista, crush)) {
             return 'FIM DO JOGO'
         } else {
             return protagonista
@@ -105,3 +106,5 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
 };
 
 //TODO: pensar na possibilidade de modularizar o tentar flertar com o jogar charme pois estão se repetindo em todas as fases.
+
+//TODO: ajustar Cantada: "Com essa concentração toda, acho que você tá tentando decifrar a fórmula da minha felicidade. Quer uma dica?"
