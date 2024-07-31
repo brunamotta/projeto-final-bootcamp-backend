@@ -1,5 +1,6 @@
-const prompt          = require('prompt-sync')();
-const validarResposta = require('./validacoes/validarResposta.js');
+const prompt = require('prompt-sync')();
+const { validarResposta } = require('../validacoes.js');
+const { valorAleatorio } = require('../sortear.js');
 
 module.exports = (protagonista, crush1, crush2, crush3) => {
     console.log('');
@@ -7,39 +8,97 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
     console.log('|                          DIA 01                          |')
     console.log('\'----------------------------------------------------------\'');
     console.log('')
-
-    // ir na academia encontrar os crushes na aula de funcional dar opção de treinar (e ganhar charme) ou flertar direto com o crush da escolha do usuário
-    console.log('Você acorda cedo e decide ir à academia para começar o dia com o pé direito. Chegando lá, você encontra os seus crushes. O que você deseja fazer?');
-    console.log(' A) Treinar.');
-    console.log(' B) Vou aquecer tentando flertar com alguém.');
+    console.log('Você acorda cedo e decide ir à academia para começar o dia com o pé direito. Chegando lá, você encontra os seus crushes. O que você vai fazer?');
+    console.log(' A) Treinar, claro.');
+    console.log(' B) Eu não venho na academia pra treinar, venho pra paquerar!');
     console.log('');
 
     let resposta = prompt('Escolha uma opção: ');
     resposta = resposta.toUpperCase();
-    resposta = validaResposta(resposta, ['A', 'B']);
+    resposta = validarResposta(resposta, ['A', 'B']);
 
     if (resposta === 'A') {
-        if (Math.floor(Math.random() * 10) >= 5) {
+
+        // TREINO
+        let sortear = valorAleatorio()*2;
+        
+        if (sortear >= 3) {
             console.log('');
-            console.log('Você escolheu treinar. O suor escorre pelo seu rosto enquanto você empurra a barra cada vez mais alto. A academia está lotada, mas você está concentrado em um único objetivo: conquistar o corpo dos seus sonhos.');
+            console.log('Você escolheu treinar. O suor escorre pelo seu rosto enquanto você empurra a barra pesada para o alto a cada repetição. A academia está lotada, mas você está concentrado em um único objetivo: conquistar o corpo dos seus sonhos.');
             console.log('Ao final do treino, você se sente mais confiante e percebe que os seus crushes estão te olhando. Parece que o seu charme natural está fazendo efeito.');   
-            protagonista.charme = aprimorarAtributo(protagonista.charme);
+
+            protagonista.charme = protagonista.aprimorarAtributo(protagonista.charme);
+
+            console.log(`Seu charme aumentou para ${protagonista.charme}.`);
+
         } else {
-            protagonista.charme = decrementarAtributo(protagonista.charme);
+            console.log('Você derrubou a barra no seu pé e todos na academia olharam para você. Que vergonha! Você tentou disfarçar, mas a dor era evidente. Acho que o crush não vai querer se aproximar de você depois disso.');
+
+            protagonista.charme = protagonista.decrementarAtributo(protagonista.charme);
+
+            console.log(`Seu charme diminuiu para ${protagonista.charme}.`);
+        }
+        // FIM DO TREINO
+
+        // DECISÃO DE IR PARA CASA OU FLERTAR
+        console.log(`Muito bem, ${protagonista.nome}, você terminou seu treino.`);
+        console.log(' A) Vamos para casa.');
+        console.log(` B) Vou tentar a sorte com alguém! (Você só tem ${protagonista.tentativasFlerte} tentativa(s) restantes.)`);
+        console.log('');
+
+        let escolha = prompt(`Qual a sua escolha? `);
+        escolha = escolha.toUpperCase();
+        escolha = validarResposta(escolha, ['A', 'B']);
+
+        if (escolha === 'A') {
+            console.log('');
+            console.log('Você decidiu ir para casa. Afinal, você já fez o suficiente por hoje. Amanhã é um novo dia.');
+            protagonista.apresentar();
+            return protagonista; //FINALIZA DIA 1 SEM FLERTAR SEGUE O JOGO
+        }
+
+        if (escolha === 'B') {
+            tentarFlertar();
         }
     }
+
     if (resposta === 'B') {
+        tentarFlertar();
+    }
+
+    function tentarFlertar() {
         console.log('');
         console.log('Você escolheu flertar. Afinal, a vida é curta e você não quer perder tempo. ');
         console.log(` A) ${crush1.nome}`);
         console.log(` B) ${crush2.nome}`);
         console.log(` C) ${crush3.nome}`);
+        console.log('');
         let escolha = prompt(`Com qual crush você deseja flertar? `);
         escolha = escolha.toUpperCase();
         escolha = validarResposta(escolha, ['A', 'B', 'C']);
-        
-        //TODO: conferir resultado do flerte e imprimir história de sucesso ou fracasso
+        console.log('');
 
+        if (escolha === 'A') {
+            jogarCharme(crush1);
+        }
+        if (escolha === 'B') {
+            jogarCharme(crush2);
+        }
+        if (escolha === 'C') {
+            jogarCharme(crush3);
+        }
+        //TODO: conferir resultado do flerte e imprimir história de sucesso ou fracasso
     }
 
+    function jogarCharme(crush) {
+        console.log(`Você se aproximou de ${crush.nome} e disse:`);
+        console.log(`- "${crush.nome}, se você fosse um exercício, eu te faria todos os dias. Mas com mais repetições e menos descanso. ;)" `);
+        if (protagonista.flertar('charme', protagonista, crush)) {
+            return 'FIM DO JOGO'
+        } else {
+            return protagonista
+        }
+    }
+
+    return protagonista
 }

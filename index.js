@@ -1,13 +1,13 @@
 //Importando módulos
-const Protagonista   = require('./personagens/protagonista.js');
-const Crush          = require('./personagens/crush.js');
-const prompt         = require('prompt-sync')();
-const validarResposta = require('./validacoes/validarResposta.js');
-const dia1           = require('./fases/dia1.js');
-/* const dia2       = require('./dias/dia2.js');
-const dia3          = require('./dias/dia3.js');
-const dia4          = require('./dias/dia4.js'); */
-
+const Protagonista                      = require('./personagens/protagonista.js');
+const Crush                             = require('./personagens/crush.js');
+const prompt                            = require('prompt-sync')();
+const { idadeCrush, valorAleatorio }    = require('./sortear.js');
+const { validarIdade, validarResposta } = require('./validacoes.js');
+const dia1                              = require('./fases/dia1.js');
+const dia2                              = require('./fases/dia2.js');
+/* const dia3                              = require('./fases/dia3.js');
+const dia4                              = require('./fases/dia4.js'); */
 
 //INICIO DO JOGO
 console.log('');
@@ -22,20 +22,20 @@ console.log('Porém, esse ano você está decidido(a) que esta data não vai pas
 console.log('');
 
 //REGRAS DO JOGO
-console.log('A regra do jogo é simples, os personagens possuem pontos de charme, inteligência, graça e dinheiro')
-console.log('Você pode escolher com quais personagens quer flertar, porém, além de contar com um pouco de sorte, eles possuem os critérios próprios.');
+console.log('A regra do jogo é simples: Os personagens possuem pontos de charme, inteligência, graça e dinheiro')
+console.log('Você pode escolher com quais personagens quer flertar, porém, além de contar com um pouco de sorte, cada um deles possuem os critérios próprios.');
 console.log('Cabe a você fazer as escolhas certas para alcançar esses critérios e conquistar o crush dos seus sonhos.');
-console.log('Você tem apenas 3 chances de flerte, caso elas se esgotem, o jogo acaba, então escolha com sabedoria!');
+console.log('Você tem apenas 2 chances de flerte, caso elas se esgotem o jogo acaba, então escolha com sabedoria!');
 console.log('');
 
 //CONSTRUINDO PROTAGONISTA
 let nome = prompt('Vamos começar pelo seu nome: ');
 let idade = prompt(`${nome}, qual a sua idade? `);
-idade = validaIdade(idade);
-let charme = 1;
-let inteligencia = 1;
-let dinheiro = 1;
-let graca = 1;
+idade = validarIdade(idade);
+let charme = 2;
+let inteligencia = 2;
+let dinheiro = 2;
+let graca = 2;
 
 //CONSTRUINDO ATRIBUTOS DO PROTAGONISTA - TESTE CAPRICHO
 console.log('');
@@ -52,7 +52,7 @@ let resposta = prompt('Escolha uma alternativa: ');
 resposta = resposta.toUpperCase();
 resposta = validarResposta(resposta, ['A', 'B', 'C', 'D']);
 
-switch (resposta.toUpperCase()) {
+switch (resposta) {
     case 'A':
         inteligencia += 2;
         dinheiro -= 1;
@@ -78,17 +78,14 @@ switch (resposta.toUpperCase()) {
         break;
 }
 
+//CONSTRUINDO PROTAGONISTA - CRIANDO OBJETO
 let protagonista = new Protagonista(nome, idade, charme, inteligencia, dinheiro, graca);
-
 console.log('');
 console.log(`${protagonista.nome}, você possui os seguintes atributos:`);
-
 protagonista.apresentar();
 
 
 //CONSTRUINDO CRUSHES
-console.log('Agora, vamos conhecer os seus crushes: ');
-
 crush1 = new Crush(
     'Fernanda',
     idadeCrush(protagonista.idade),
@@ -116,10 +113,11 @@ crush3 = new Crush(
     valorAleatorio(),           //inteligencia
     (2 + valorAleatorio()),     //dinheiro +
     valorAleatorio(),           //graça
-    'É cara muito rico e charmoso. Ele adora praticar esportes e sair para dançar.'
+    'É um cara rico e charmoso. Ele adora praticar esportes e sair para dançar.'
 );
 
 //APRESENTANDO CRUSHES
+console.log('Agora, vamos conhecer os seus pretendentes: ');
 crush1.apresentar();
 crush2.apresentar();
 crush3.apresentar();
@@ -127,64 +125,27 @@ crush3.apresentar();
 console.log('Muito bem! Você tem 4 dias para conquistar um crush. Boa sorte!');
 
 // FASE 01 - ACADEMIA
-
-dia1();
+protagonista = dia1(protagonista, crush1, crush2, crush3);
 
 // FASE 02 - FACULDADE
+protagonista = dia2(protagonista, crush1, crush2, crush3);
 
+console.log('CONTINUA....')
 // FASE 03 - BOATE
 
 // FASE 04 - SHOPPING
 
-// FASE 05 - ENCONTRO
+if (protagonista.tentativasFlerte <= 0) {
+    console.log(`Que pena, você vai passar mais um dia dos namorados sozinho(a) esse ano! :( `);
+}
+
+// FINAL - ENCONTRO
 /* Terminar a história contando como foi o encontro do protagonista com o crush no dia dos namorados*/
 /* dizer q foi um fiasco e que vc pode tentar conquistar outra pessoa ano q vem rs*/
 
-//TODO: ver onde vou botar isso: "console.log(`Que pena, você vai passar mais um dia dos namorados sozinho(a) esse ano! :( `);"
-
 console.log('.----------------------------------------------------------.');
-console.log('|                         FIM DO JOGO                       |')
+console.log('|                         FIM DO JOGO                      |')
 console.log('\'----------------------------------------------------------\'');
 console.log('')
-
-
-//Função para gerar idade dos crushes
-function idadeCrush(idadeprotagonista) {
-    let idadeCrush = idadeprotagonista - Math.floor(Math.random() * 10/2);
-    return idadeCrush;
-}
-
-//Função para gerar valor de atributo aleatório
-function valorAleatorio() {
-    return parseInt(Math.floor(Math.random() * 10));
-}
-
-function validaIdade(entrada) {
-    try {
-        if (isNaN(entrada)) {
-            throw (new Error('Entrada inválida! Digite apenas números.'));
-        }
-    } catch (error) {
-        console.error(error.message);
-        console.log('');
-        entrada = parseInt(prompt('Qual a sua idade? '));
-        entrada = validaIdade(entrada);
-    }
-
-    return parseInt(entrada);
-}
-
-/* function validaResposta(resposta, opcoes) {
-    try {
-        if (!opcoes.includes(resposta)) {
-            throw (new Error('Alternativa inválida! Digite apenas a letra correspondente a alternativa desejada.'));
-        }
-    } catch (error) {
-        console.error(error.message);
-        console.log('');
-        resposta = prompt('Escolha uma alternativa: ');
-        resposta = validaResposta(resposta,opcoes);
-    }
-
-    return resposta;
-} */
+console.log('Obrigado por jogar! Até a próxima! :) ')
+console.log('')

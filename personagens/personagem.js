@@ -9,6 +9,7 @@ class Personagem {
     }
 
     apresentar() {
+        console.log('');
         console.log(`${this.nome}, ${this.idade} anos.`);
     }
 }
