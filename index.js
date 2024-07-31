@@ -2,12 +2,12 @@
 const Protagonista                      = require('./personagens/protagonista.js');
 const Crush                             = require('./personagens/crush.js');
 const prompt                            = require('prompt-sync')();
-const { idadeCrush, valorAleatorio }    = require('./sortear.js');
+const { valorAleatorio, idadeCrush }    = require('./sortear.js');
 const { validarIdade, validarResposta } = require('./validacoes.js');
 const dia1                              = require('./fases/dia1.js');
 const dia2                              = require('./fases/dia2.js');
-/* const dia3                              = require('./fases/dia3.js');
-const dia4                              = require('./fases/dia4.js'); */
+const dia3                              = require('./fases/dia3.js');
+/* const dia4                              = require('./fases/dia4.js'); */
 
 //INICIO DO JOGO
 console.log('');
@@ -124,24 +124,29 @@ crush3.apresentar();
 
 console.log('Muito bem! Você tem 4 dias para conquistar um crush. Boa sorte!');
 
+while (protagonista.tentativasFlerte > 0) {
 // FASE 01 - ACADEMIA
-dia1(protagonista, crush1, crush2, crush3);
-protagonista.apresentar();
+    dia1(protagonista, crush1, crush2, crush3);
+    protagonista.apresentar();
 
 // FASE 02 - FACULDADE
-dia2(protagonista, crush1, crush2, crush3);
-protagonista.apresentar();
+    dia2(protagonista, crush1, crush2, crush3);
+    protagonista.apresentar();
 
-console.log('CONTINUA....')
-// FASE 03 - BOATE
+// FASE 03 - CHOPADA
+    dia3(protagonista, crush1, crush2, crush3);
 
+    console.log('CONTINUA....')
 // FASE 04 - SHOPPING
+
+}
 
 if (protagonista.tentativasFlerte <= 0) {
     console.log(`Que pena, você vai passar mais um dia dos namorados sozinho(a) esse ano! :( `);
 }
 
 // FINAL - ENCONTRO
+
 /* Terminar a história contando como foi o encontro do protagonista com o crush no dia dos namorados*/
 /* dizer q foi um fiasco e que vc pode tentar conquistar outra pessoa ano q vem rs*/
 
