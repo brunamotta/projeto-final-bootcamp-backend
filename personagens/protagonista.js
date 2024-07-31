@@ -5,11 +5,11 @@ class Protagonista extends Personagem {
 
     constructor(nome, idade, charme, inteligencia, dinheiro, graça) {
         super(nome, idade, charme, inteligencia, dinheiro, graça);
-        this.#tentativasFlerte = 2;
+        this.#tentativasFlerte = 1;
     }
 
     aprimorarAtributo(atributo) {
-        let aumento = Math.floor((Math.random() * 10) / 2);
+        let aumento = Math.floor(Math.random() * 5);
         if (aumento == 0) {
             aumento = 1;
         }
@@ -18,7 +18,7 @@ class Protagonista extends Personagem {
     }
 
     decrementarAtributo(atributo) {
-        let decremento = Math.floor((Math.random() * 10) / 2);
+        let decremento = Math.floor(Math.random() * 5);
         if (decremento == 0) {
             decremento = 1;
         }
@@ -27,16 +27,12 @@ class Protagonista extends Personagem {
     }
 
     flertar(atributo, protagonista, crush) {
-        console.log(protagonista[atributo]);
-        console.log(crush[atributo]);
         if (protagonista[atributo] >= crush[atributo]) {
-            console.log(`Você flertou com ${crush.nome}, e conseguiu um date para o dia dos namorados! PARABÉNS! :) `);
-            this.tentativasFlerte--;
+            this.tentativasFlerte = 0;
             return true;
             
         } else {
-            console.log(`Você flertou com ${crush.nome}, falou besteira, e agora ele te acha um pouco estranho...`);
-            this.tentativasFlerte--;
+            this.tentativasFlerte = 0;
             return false;
         }
     }
@@ -55,7 +51,6 @@ class Protagonista extends Personagem {
         console.log(`Inteligência: ${this.inteligencia}`);
         console.log(`Dinheiro:     ${this.dinheiro}`);
         console.log(`Graça:        ${this.graça}`);
-        console.log(`Tentativas de flerte restantes: ${this.tentativasFlerte}`);
         console.log(``);
     }
 

@@ -2,12 +2,12 @@
 const Protagonista                      = require('./personagens/protagonista.js');
 const Crush                             = require('./personagens/crush.js');
 const prompt                            = require('prompt-sync')();
-const { valorAleatorio, idadeCrush }    = require('./sortear.js');
-const { validarIdade, validarResposta } = require('./validacoes.js');
+const { valorAleatorio, idadeCrush }    = require('./utilitarios/sortear.js');
+const { validarIdade, validarResposta } = require('./utilitarios/validacoes.js');
 const dia1                              = require('./fases/dia1.js');
 const dia2                              = require('./fases/dia2.js');
 const dia3                              = require('./fases/dia3.js');
-/* const dia4                              = require('./fases/dia4.js'); */
+const diaDosNamorados                   = require('./fases/diaDosNamorados.js');
 
 //INICIO DO JOGO
 console.log('');
@@ -25,7 +25,7 @@ console.log('');
 console.log('A regra do jogo é simples: Os personagens possuem pontos de charme, inteligência, graça e dinheiro')
 console.log('Você pode escolher com quais personagens quer flertar, porém, além de contar com um pouco de sorte, cada um deles possuem os critérios próprios.');
 console.log('Cabe a você fazer as escolhas certas para alcançar esses critérios e conquistar o crush dos seus sonhos.');
-console.log('Você tem apenas 2 chances de flerte, caso elas se esgotem o jogo acaba, então escolha com sabedoria!');
+console.log('Você tem apenas 1 chance de flerte, se falhar o jogo acaba, então escolha com sabedoria!');
 console.log('');
 
 //CONSTRUINDO PROTAGONISTA
@@ -84,7 +84,6 @@ console.log('');
 console.log(`${protagonista.nome}, você possui os seguintes atributos:`);
 protagonista.apresentar();
 
-
 //CONSTRUINDO CRUSHES
 crush1 = new Crush(
     'Fernanda',
@@ -122,23 +121,46 @@ crush1.apresentar();
 crush2.apresentar();
 crush3.apresentar();
 
-console.log('Muito bem! Você tem 4 dias para conquistar um crush. Boa sorte!');
+console.log('Muito bem! Você tem 3 dias para conquistar um crush. Boa sorte!');
+
+//COMEÇAR AS FASES
 
 while (protagonista.tentativasFlerte > 0) {
 // FASE 01 - ACADEMIA
-    dia1(protagonista, crush1, crush2, crush3);
+    let fase1 = dia1(protagonista, crush1, crush2, crush3);
+
+    if (fase1[0]) {
+        diaDosNamorados(protagonista, fase1[1]);
+        break;
+    }
+
+    console.log('');
+    console.log('Vamos revisar seu atual status:');
     protagonista.apresentar();
+    prompt('Pressione ENTER para continuar...');
 
 // FASE 02 - FACULDADE
-    dia2(protagonista, crush1, crush2, crush3);
+    let fase2 = dia2(protagonista, crush1, crush2, crush3);
+
+    if (fase2[0]) {
+        diaDosNamorados(protagonista, fase2[1]);
+        break;
+    }
+
+    console.log('');
+    console.log('Vamos revisar seu atual status:');
     protagonista.apresentar();
+    prompt('Pressione ENTER para continuar...');
 
 // FASE 03 - CHOPADA
-    dia3(protagonista, crush1, crush2, crush3);
+    let fase3 = dia3(protagonista, crush1, crush2, crush3);
 
-    console.log('CONTINUA....')
-// FASE 04 - SHOPPING
-
+    if (fase3[0]) {
+        diaDosNamorados(protagonista, dia3[1]);
+        break;
+    }
+    prompt('Pressione ENTER para continuar...');
+    break;
 }
 
 if (protagonista.tentativasFlerte <= 0) {

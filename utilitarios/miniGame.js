@@ -1,5 +1,5 @@
-const prompt            = require('prompt-sync')();
-const { validarChute }  = require('../validacoes.js');
+const prompt           = require('prompt-sync')();
+const { validarChute } = require('./validacoes.js');
 
 function miniGame() {
     console.log(' --------------------------------- DANCE DANCE REVOLUTION --------------------------------- ');
@@ -34,4 +34,4 @@ function miniGame() {
     return false;
 }
 
-module.exports = miniGame;
+module.exports = { miniGame };

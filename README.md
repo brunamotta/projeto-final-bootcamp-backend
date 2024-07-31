@@ -31,6 +31,10 @@ Desenvolver uma tela interativa em JavaScript utilizando Node.js, onde os alunos
 6. Vídeo Demonstrativo:
     - Grave um vídeo mostrando o funcionamento do projeto, explicando cada parte do código e como os conceitos foram aplicados.
 
+FLUXO DE INTERATIVIDADE:
+
+https://miro.com/app/board/uXjVKu627xU=/?share_link_id=514901270672
+
 ---
 
 ## Passos para Desenvolvimento:

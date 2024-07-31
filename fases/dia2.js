@@ -1,6 +1,7 @@
 const prompt              = require('prompt-sync')();
-const { validarResposta } = require('../validacoes.js');
-const { valorAleatorio }  = require('../sortear.js');
+const { validarResposta } = require('../utilitarios/validacoes.js');
+const { valorAleatorio }  = require('../utilitarios/sortear.js');
+const { tentarFlertar } = require('../utilitarios/paquera.js');
 
 module.exports = (protagonista, crush1, crush2, crush3) => {
     console.log('');
@@ -56,55 +57,37 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
         if (escolha === 'A') {
             console.log('');
             console.log('Você decidiu ir para casa. Foi um dia cheio e você merece e precisa descansar.');
-            return protagonista;
+            return false;
         }
 
         // ESCOLHE FLERTAR
         if (escolha === 'B') {
-            tentarFlertar();
+            let deuMatch = tentarFlertar(protagonista, crush1, crush2, crush3, 'inteligencia');
+
+            console.log(`- "Olha, com toda essa concentração, acho que você tá tentando decifrar a fórmula da minha felicidade. Quer uma dica? ;)" `);
+
+            if (deuMatch) {
+                return true;
+            } else {
+                console.log('Fez-se um silêncio constrangedor. Com isso você rapidamente emendou um "to brincando kkkk" super sem graça e saiu de perto igual um cão com o rabo entre as pernas.');
+                console.log('Você decidiu ir para casa. Foi um dia ruim e você precisa esquecer o que aconteceu hoje.');
+                return false;
+            }
         }
     }
 
     // PULA OS ESTUDOS E VAI DIRETO PRO FLERTE
     if (resposta === 'B') {
-        tentarFlertar();
-    }
-    
-    function tentarFlertar() {
-        console.log('');
-        console.log('Você escolheu flertar. Afinal, a vida é curta e você não quer perder tempo. ');
-        console.log(` A) ${crush1.nome}`);
-        console.log(` B) ${crush2.nome}`);
-        console.log(` C) ${crush3.nome}`);
-        console.log('');
-        let escolha = prompt(`Com qual crush você deseja flertar? `);
-        escolha = escolha.toUpperCase();
-        escolha = validarResposta(escolha, ['A', 'B', 'C']);
-        console.log('');
+        let deuMatch = tentarFlertar(protagonista, crush1, crush2, crush3, 'inteligencia');
 
-        if (escolha === 'A') {
-            jogarCharme(crush1);
-        }
-        if (escolha === 'B') {
-            jogarCharme(crush2);
-        }
-        if (escolha === 'C') {
-            jogarCharme(crush3);
-        }
-        //TODO: conferir resultado do flerte e imprimir história de sucesso ou fracasso
-    }
+        console.log(`- "Olha, com toda essa concentração, acho que você tá tentando decifrar a fórmula da minha felicidade. Quer uma dica? ;)" `);
 
-    function jogarCharme(crush) {
-        console.log(`Você se aproximou de ${crush.nome} e disse:`);
-        console.log(`- "${crush.nome}, com essa concentração toda, acho que você tá tentando decifrar a fórmula da minha felicidade. Quer uma dica?" `);
-        if (protagonista.flertar('inteligencia', protagonista, crush)) {
-            return 'FIM DO JOGO'
+        if (deuMatch) {
+            return deuMatch;
         } else {
-            return protagonista
+            console.log('Fez-se um silêncio constrangedor. Com isso você rapidamente emendou um "to brincando kkkk" super sem graça e saiu de perto igual um cão com o rabo entre as pernas.');
+            console.log('Você decidiu ir para casa. Foi um dia ruim e você precisa esquecer o que aconteceu hoje.');
+            return false;
         }
     }
 };
-
-//TODO: pensar na possibilidade de modularizar o tentar flertar com o jogar charme pois estão se repetindo em todas as fases.
-
-//TODO: ajustar Cantada: "Com essa concentração toda, acho que você tá tentando decifrar a fórmula da minha felicidade. Quer uma dica?"
