@@ -125,10 +125,12 @@ crush3.apresentar();
 console.log('Muito bem! Você tem 4 dias para conquistar um crush. Boa sorte!');
 
 // FASE 01 - ACADEMIA
-protagonista = dia1(protagonista, crush1, crush2, crush3);
+dia1(protagonista, crush1, crush2, crush3);
+protagonista.apresentar();
 
 // FASE 02 - FACULDADE
-protagonista = dia2(protagonista, crush1, crush2, crush3);
+dia2(protagonista, crush1, crush2, crush3);
+protagonista.apresentar();
 
 console.log('CONTINUA....')
 // FASE 03 - BOATE
@@ -149,3 +151,11 @@ console.log('\'----------------------------------------------------------\'');
 console.log('')
 console.log('Obrigado por jogar! Até a próxima! :) ')
 console.log('')
+console.log('')
+console.log('CRÉDITOS:');
+console.log('Desenvolvido por: Bruna Motta. (github.com/brunamotta)')
+console.log('Inspirado no jogo "Monster Prom" da Beautiful Glitch.')
+console.log('')
+
+
+//TODO: verificar como fazer o jogo terminar caso o flerte seja sucesso (está continuando por enquanto)

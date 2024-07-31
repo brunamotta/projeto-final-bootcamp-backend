@@ -43,25 +43,28 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
         // DECISÃO DE IR PARA CASA OU FLERTAR
         console.log(`Muito bem, ${protagonista.nome}, você terminou seu treino.`);
         console.log(' A) Vamos para casa.');
-        console.log(` B) Vou tentar a sorte com alguém! (Você só tem ${protagonista.tentativasFlerte} tentativa(s) restantes.)`);
+        console.log(` B) Vou tentar a sorte com alguém! (Você só tem ${protagonista.tentativasFlerte} tentativa(s) restante(s).)`);
         console.log('');
 
         let escolha = prompt(`Qual a sua escolha? `);
         escolha = escolha.toUpperCase();
         escolha = validarResposta(escolha, ['A', 'B']);
 
+        //FINALIZA DIA 1 SEM FLERTAR SEGUE O JOGO
         if (escolha === 'A') {
             console.log('');
             console.log('Você decidiu ir para casa. Afinal, você já fez o suficiente por hoje. Amanhã é um novo dia.');
             protagonista.apresentar();
-            return protagonista; //FINALIZA DIA 1 SEM FLERTAR SEGUE O JOGO
+            return protagonista; 
         }
 
+        // ESCOLHE FLERTAR
         if (escolha === 'B') {
             tentarFlertar();
         }
     }
 
+    // PULA O TREINO E VAI DIRETO PRO FLERTE
     if (resposta === 'B') {
         tentarFlertar();
     }
@@ -94,11 +97,13 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
         console.log(`Você se aproximou de ${crush.nome} e disse:`);
         console.log(`- "${crush.nome}, se você fosse um exercício, eu te faria todos os dias. Mas com mais repetições e menos descanso. ;)" `);
         if (protagonista.flertar('charme', protagonista, crush)) {
+            protagonista.apresentar();
             return 'FIM DO JOGO'
         } else {
+            protagonista.apresentar();
             return protagonista
         }
     }
+};
 
-    return protagonista
-}
+//TODO: pensar na possibilidade de modularizar o tentar flertar com o jogar charme pois estão se repetindo em todas as fases.
