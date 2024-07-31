@@ -1,15 +1,15 @@
+//Função para gerar valor aleatório de 0 a 5
+function valorAleatorio() {
+    return parseInt(Math.floor(Math.random() * 5));
+}
+
 //Função para gerar idade dos crushes
 function idadeCrush(idadeprotagonista) {
-    let idadeCrush = idadeprotagonista - Math.floor(Math.random() * 10/2);
+    let idadeCrush = idadeprotagonista - valorAleatorio();
     return idadeCrush;
 }
 
-//Função para gerar valor de atributo aleatório
-function valorAleatorio() {
-    return parseInt(Math.floor(Math.random() * 10)/2);
-}
-
 module.exports = {
-    idadeCrush,
-    valorAleatorio
+    valorAleatorio,
+    idadeCrush
 };
