@@ -56,7 +56,7 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
         if (escolha === 'A') {
             console.log('');
             console.log('Você decidiu ir para casa. Afinal, você já fez o suficiente por hoje. Amanhã é um novo dia.');
-            return 'continuar'; 
+            return false; 
         }
 
         // ESCOLHE FLERTAR

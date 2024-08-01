@@ -24,10 +24,10 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
     
     if (resposta === 'A') {
         if (miniGame()) {
-            protagonista.aprimorarAtributo(protagonista.graca);
+            protagonista.graca = protagonista.aprimorarAtributo(protagonista.graca);
             console.log(`Sua graça aumentou para ${protagonista.graca} e você se sente confiante e pronto para conquistar o crush dos seus sonhos.`);
         } else {
-            protagonista.decrementarAtributo(protagonista.graca);
+            protagonista.graca = protagonista.decrementarAtributo(protagonista.graca);
             console.log(`Sua graça diminuiu para ${protagonista.graca} e você se sente um pouco desanimado e constrangido. ^^\' `);
         }
 
