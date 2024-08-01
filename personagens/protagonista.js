@@ -1,11 +1,9 @@
 const Personagem = require('./personagem.js');
 
 class Protagonista extends Personagem {
-    #tentativasFlerte
 
-    constructor(nome, idade, charme, inteligencia, dinheiro, graça) {
-        super(nome, idade, charme, inteligencia, dinheiro, graça);
-        this.#tentativasFlerte = 1;
+    constructor(nome, idade, charme, inteligencia, dinheiro, graca) {
+        super(nome, idade, charme, inteligencia, dinheiro, graca);
     }
 
     aprimorarAtributo(atributo) {
@@ -26,23 +24,12 @@ class Protagonista extends Personagem {
         return atributo;
     }
 
-    flertar(atributo, protagonista, crush) {
-        if (protagonista[atributo] >= crush[atributo]) {
-            this.tentativasFlerte = 0;
+    flertar(atributo, crush) {
+        if (this[atributo] >= crush[atributo]) {
             return true;
-            
         } else {
-            this.tentativasFlerte = 0;
             return false;
         }
-    }
-
-    get tentativasFlerte() {
-        return this.#tentativasFlerte;
-    }
-
-    set tentativasFlerte(tentativasAtualizadas) {
-        return this.#tentativasFlerte = tentativasAtualizadas;
     }
 
     apresentar() {
@@ -50,7 +37,7 @@ class Protagonista extends Personagem {
         console.log(`Charme:       ${this.charme}`);
         console.log(`Inteligência: ${this.inteligencia}`);
         console.log(`Dinheiro:     ${this.dinheiro}`);
-        console.log(`Graça:        ${this.graça}`);
+        console.log(`Graça:        ${this.graca}`);
         console.log(``);
     }
 

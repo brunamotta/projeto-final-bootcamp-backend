@@ -1,8 +1,7 @@
 const prompt              = require('prompt-sync')();
 const { validarResposta } = require('../utilitarios/validacoes.js');
-const { valorAleatorio }  = require('../utilitarios/sortear.js');
 const { tentarFlertar }   = require('../utilitarios/paquera.js');
-const { miniGame }        = require('../miniGame.js');
+const { miniGame }        = require('../utilitarios/miniGame.js');
 
 
 module.exports = (protagonista, crush1, crush2, crush3) => {
@@ -17,24 +16,23 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
     console.log('A pista de dança te chamava, mas você ainda não se decidiu se cai dentro ou se explora um pouco antes. Suas opções são:');
     console.log(' A) Vou direto pra pista de dança!');
     console.log(' B) Melhor eu dar uma volta pra pegar uma bebida antes e ver se encontro alguém interessante.');
-    console.log('');
-
+    
     let resposta = prompt('O que você vai fazer? ');
     resposta = resposta.toUpperCase();
     resposta = validarResposta(resposta, ['A', 'B']);
-
+    console.log('');
+    
     if (resposta === 'A') {
         if (miniGame()) {
-            protagonista.graca = protagonista.aprimorarAtributo(protagonista.graca);
-            console.log(`Sua graca aumentou para ${protagonista.graca}.`);
-            console.log('Você se sente confiante e pronto para conquistar o crush dos seus sonhos.');
+            protagonista.aprimorarAtributo(protagonista.graca);
+            console.log(`Sua graça aumentou para ${protagonista.graca} e você se sente confiante e pronto para conquistar o crush dos seus sonhos.`);
         } else {
-            protagonista.graca = protagonista.decrementarAtributo(protagonista.graca);
-            console.log(`Sua graca diminuiu para ${protagonista.graca}.`);
-            console.log('Você se sente um pouco desanimado e constrangido. (^^\') ');
+            protagonista.decrementarAtributo(protagonista.graca);
+            console.log(`Sua graça diminuiu para ${protagonista.graca} e você se sente um pouco desanimado e constrangido. ^^\' `);
         }
 
-        console.log('Um tempo se passou, seus crushes estão na festa, você ja tomou umas para criar coragem e finalmente...');
+        console.log('');
+        console.log('Um tempo se passou... Seus crushes estão na festa... Você ja tomou uns bons drinks para criar coragem e finalmente...');
 
         let deuMatch = tentarFlertar(protagonista, crush1, crush2, crush3, 'graca');
 

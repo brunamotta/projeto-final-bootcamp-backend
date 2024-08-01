@@ -25,7 +25,6 @@ console.log('');
 console.log('A regra do jogo é simples: Os personagens possuem pontos de charme, inteligência, graça e dinheiro')
 console.log('Você pode escolher com quais personagens quer flertar, porém, além de contar com um pouco de sorte, cada um deles possuem os critérios próprios.');
 console.log('Cabe a você fazer as escolhas certas para alcançar esses critérios e conquistar o crush dos seus sonhos.');
-console.log('Você tem apenas 1 chance de flerte, se falhar o jogo acaba, então escolha com sabedoria!');
 console.log('');
 
 //CONSTRUINDO PROTAGONISTA
@@ -122,55 +121,44 @@ crush2.apresentar();
 crush3.apresentar();
 
 console.log('Muito bem! Você tem 3 dias para conquistar um crush. Boa sorte!');
-
+console.log('');
+prompt('Pressione ENTER para começar...');
+console.log('');
 //COMEÇAR AS FASES
+while(true) {
 
-while (protagonista.tentativasFlerte > 0) {
-// FASE 01 - ACADEMIA
     let fase1 = dia1(protagonista, crush1, crush2, crush3);
-
-    if (fase1[0]) {
+    if(fase1[0]) {
         diaDosNamorados(protagonista, fase1[1]);
         break;
     }
-
     console.log('');
     console.log('Vamos revisar seu atual status:');
     protagonista.apresentar();
     prompt('Pressione ENTER para continuar...');
 
-// FASE 02 - FACULDADE
     let fase2 = dia2(protagonista, crush1, crush2, crush3);
-
-    if (fase2[0]) {
+    if(fase2[0]) {
         diaDosNamorados(protagonista, fase2[1]);
         break;
     }
-
     console.log('');
     console.log('Vamos revisar seu atual status:');
     protagonista.apresentar();
     prompt('Pressione ENTER para continuar...');
 
-// FASE 03 - CHOPADA
     let fase3 = dia3(protagonista, crush1, crush2, crush3);
-
-    if (fase3[0]) {
-        diaDosNamorados(protagonista, dia3[1]);
+    if(fase3[0]) {
+        diaDosNamorados(protagonista, fase3[1]);
+        break;
+    } else {
+        console.log('');
+        console.log(`Que pena, você vai passar mais um dia dos namorados sozinho(a) esse ano! :( `);
+        console.log('');
+        console.log('Mas não desanime, você pode tentar novamente no ano que vem!');
         break;
     }
-    prompt('Pressione ENTER para continuar...');
-    break;
 }
-
-if (protagonista.tentativasFlerte <= 0) {
-    console.log(`Que pena, você vai passar mais um dia dos namorados sozinho(a) esse ano! :( `);
-}
-
-// FINAL - ENCONTRO
-
-/* Terminar a história contando como foi o encontro do protagonista com o crush no dia dos namorados*/
-/* dizer q foi um fiasco e que vc pode tentar conquistar outra pessoa ano q vem rs*/
 
 console.log('.----------------------------------------------------------.');
 console.log('|                         FIM DO JOGO                      |')
@@ -179,10 +167,9 @@ console.log('')
 console.log('Obrigado por jogar! Até a próxima! :) ')
 console.log('')
 console.log('')
-console.log('CRÉDITOS:');
+console.log('.----------------------------------------------------------.');
+console.log('|                          CRÉDITOS                        |')
+console.log('\'----------------------------------------------------------\'');
 console.log('Desenvolvido por: Bruna Motta. (github.com/brunamotta)')
 console.log('Inspirado no jogo "Monster Prom" da Beautiful Glitch.')
 console.log('')
-
-
-//TODO: verificar como fazer o jogo terminar caso o flerte seja sucesso (está continuando por enquanto)

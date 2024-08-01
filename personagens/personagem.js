@@ -1,11 +1,11 @@
 class Personagem {
-    constructor(nome, idade, charme, inteligencia, dinheiro, graça) {
+    constructor(nome, idade, charme, inteligencia, dinheiro, graca) {
         this.nome = nome;
         this.idade = idade;
         this.charme = charme;
         this.inteligencia = inteligencia;
         this.dinheiro = dinheiro;
-        this.graça = graça;
+        this.graca = graca;
     }
 
     apresentar() {

@@ -15,19 +15,19 @@ function tentarFlertar(protagonista, crush1, crush2, crush3, atributo) {
     let deuMatch;
     console.log(`Você se aproximou de seu alvo e disse:`);
     if (escolha === 'A') {
-        deuMatch = jogarCharme(protagonista, crush1, atributo);
+        deuMatch = jogarCharme(atributo, protagonista, crush1);
     }
     if (escolha === 'B') {
-        deuMatch = jogarCharme(protagonista, crush2, atributo);
+        deuMatch = jogarCharme(atributo, protagonista, crush2);
     }
     if (escolha === 'C') {
-        deuMatch = jogarCharme(protagonista, crush3, atributo);
+        deuMatch = jogarCharme(atributo, protagonista, crush3);
     }
     return deuMatch;
 }
 
-function jogarCharme(protagonista, crush, atributo) {
-    let deuMatch = [protagonista.flertar(atributo, protagonista, crush),crush];
+function jogarCharme(atributo, protagonista, crush) {
+    let deuMatch = [protagonista.flertar(atributo, crush), crush];
     return deuMatch;
 }
 

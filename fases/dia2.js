@@ -45,9 +45,11 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
         // FIM DOS ESTUDOS
 
         // DECISÃO DE IR PARA CASA OU FLERTAR
+        console.log('');
         console.log(`Muito bem, ${protagonista.nome}, você não tem mais aulas hoje.`);
         console.log(' A) Estou cansado por hoje, vou dormir.');
-        console.log(` B) Desta vez me sinto pronto(a) para seduzir! (Você só tem ${protagonista.tentativasFlerte} tentativa(s) restante(s)).`);
+        console.log(` B) Desta vez me sinto pronto(a) para seduzir!`);
+        console.log('');
 
         let escolha = prompt('Qual a sua escolha? ');
         escolha = escolha.toUpperCase();
