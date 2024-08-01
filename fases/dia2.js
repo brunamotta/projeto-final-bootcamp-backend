@@ -1,3 +1,4 @@
+//Importando módulos
 const prompt              = require('prompt-sync')();
 const { validarResposta } = require('../utilitarios/validacoes.js');
 const { valorAleatorio }  = require('../utilitarios/sortear.js');

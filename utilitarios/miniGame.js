@@ -1,6 +1,8 @@
+//Importando módulos
 const prompt           = require('prompt-sync')();
 const { validarChute } = require('./validacoes.js');
 
+//MINIGAME PARA VER SE O JOGADOR GANHA PONTOS DE GRAÇA DANCANDO NA PISTA DA CHOPADA
 function miniGame() {
     console.log(' --------------------------------- DANCE DANCE REVOLUTION --------------------------------- ');
     console.log(' Você vai pra pista e se prepara pois sua música está tocando, bora dançar!');

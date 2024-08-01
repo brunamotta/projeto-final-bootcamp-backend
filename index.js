@@ -127,6 +127,7 @@ console.log('');
 //COMEÇAR AS FASES
 while(true) {
 
+// FASE 1 - ACADEMIA
     let fase1 = dia1(protagonista, crush1, crush2, crush3);
     if(fase1[0]) {
         diaDosNamorados(protagonista, fase1[1]);
@@ -137,6 +138,7 @@ while(true) {
     protagonista.apresentar();
     prompt('Pressione ENTER para continuar...');
 
+//FASE 2 - FACULDADE
     let fase2 = dia2(protagonista, crush1, crush2, crush3);
     if(fase2[0]) {
         diaDosNamorados(protagonista, fase2[1]);
@@ -147,6 +149,7 @@ while(true) {
     protagonista.apresentar();
     prompt('Pressione ENTER para continuar...');
 
+//FASE 3 - CHOPADA
     let fase3 = dia3(protagonista, crush1, crush2, crush3);
     if(fase3[0]) {
         diaDosNamorados(protagonista, fase3[1]);
@@ -160,6 +163,7 @@ while(true) {
     }
 }
 
+// ENCERRAMENTO DO JOGO
 console.log('.----------------------------------------------------------.');
 console.log('|                         FIM DO JOGO                      |')
 console.log('\'----------------------------------------------------------\'');

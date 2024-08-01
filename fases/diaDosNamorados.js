@@ -1,7 +1,8 @@
+// Importa o módulo prompt-sync
 const prompt = require('prompt-sync')();
 
+//HISTÓRIA FINAL DO JOGO QUANDO VENCIDO
 module.exports = (protagonista, crush) => {
-
     console.log('');
     console.log('');
     console.log(`Por incrível que pareça a cantada funcionou com ${crush.nome}!`);

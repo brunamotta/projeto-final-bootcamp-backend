@@ -1,6 +1,8 @@
+//Importando módulos
 const prompt = require('prompt-sync')();
 const { validarResposta } = require('./validacoes.js');
 
+//FUNÇÃO PARA TENTAR FLERTAR COM UM CRUSH
 function tentarFlertar(protagonista, crush1, crush2, crush3, atributo) {
     console.log('');
     console.log('Você escolheu flertar. Afinal, a vida é curta e você não quer perder tempo. ');
@@ -26,6 +28,7 @@ function tentarFlertar(protagonista, crush1, crush2, crush3, atributo) {
     return deuMatch;
 }
 
+//FUNÇÃO PARA JOGAR CHARME E CHAMAR O ATRIBUTO DA CLASSE PROTAGONISTA
 function jogarCharme(atributo, protagonista, crush) {
     let deuMatch = [protagonista.flertar(atributo, crush), crush];
     return deuMatch;

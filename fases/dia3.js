@@ -1,8 +1,8 @@
+//Importando módulos
 const prompt              = require('prompt-sync')();
 const { validarResposta } = require('../utilitarios/validacoes.js');
 const { tentarFlertar }   = require('../utilitarios/paquera.js');
 const { miniGame }        = require('../utilitarios/miniGame.js');
-
 
 module.exports = (protagonista, crush1, crush2, crush3) => {
     console.log('');
@@ -23,6 +23,7 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
     console.log('');
     
     if (resposta === 'A') {
+        // DANÇAR
         if (miniGame()) {
             protagonista.graca = protagonista.aprimorarAtributo(protagonista.graca);
             console.log(`Sua graça aumentou para ${protagonista.graca} e você se sente confiante e pronto para conquistar o crush dos seus sonhos.`);
@@ -30,7 +31,9 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
             protagonista.graca = protagonista.decrementarAtributo(protagonista.graca);
             console.log(`Sua graça diminuiu para ${protagonista.graca} e você se sente um pouco desanimado e constrangido. ^^\' `);
         }
+        // FIM DANÇA
 
+        // FLERTAR FINAL
         console.log('');
         console.log('Um tempo se passou... Seus crushes estão na festa... Você ja tomou uns bons drinks para criar coragem e finalmente...');
 
@@ -49,6 +52,7 @@ module.exports = (protagonista, crush1, crush2, crush3) => {
         }
     }
 
+    //PULAR DANÇA  E VAI DIRETO PRO FLERTE
     if (resposta === 'B') {
         let deuMatch = tentarFlertar(protagonista, crush1, crush2, crush3, 'graca');
 
